@@ -1,41 +1,30 @@
 <nav class="navbar bg-dark footer" data-bs-theme="dark">
   <div class="container-fluid">
     <ul class="navbar-nav mx-auto">
-      <li class="nav-item ">
-        <a class="nav-link" href="#">Contact
+      <li class="nav-item">
+        <a class="nav-link shad" href="#">Contact
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Mentions Légales</a>
+        <a class="nav-link shad" href="#">Mentions Légales</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Politique de confidentialité</a>
+        <a class="nav-link shad" href="#">Politique de confidentialité</a>
       </li>
     </ul>
     <ul class="navbar-nav mx-auto">
       <h5 class="text-white">Horaires d'ouverture</h3>
+        {% for openingTime in openingTimes %}
         <li class="nav-item text-white">
-          Lundi 8h00 - 12h00 14h00 - 18h00
+          {{ openingTime.day }}
+          {% if openingTime.openAM is not null and openingTime.closeAM is not null %}
+          {{ openingTime.openAM|date("G:i") }} - {{ openingTime.closeAM|date("G:i") }}
+          {% else %} Fermé - {% endif %}
+          {% if openingTime.openPM is not null and openingTime.closePM is not null %}
+          {{ openingTime.openPM|date("G:i") }} - {{ openingTime.closePM|date("G:i") }}
+          {% else %} Fermé {% endif %}
         </li>
-        <li class="nav-item text-white">
-          Mardi 8h00 - 12h00 14h00 - 18h00
-        </li>
-        <li class="nav-item text-white">
-          Mercredi 8h00 - 12h00 14h00 - 18h00
-        </li>
-        <li class="nav-item text-white">
-          Jeudi 8h00 - 12h00 14h00 - 18h00
-        </li>
-        <li class="nav-item text-white">
-          Vendredi 8h00 - 12h00 14h00 - 18h00
-        </li>
-        <li class="nav-item text-white">
-          Samedi 8h00 - 12h00 Fermé
-        </li>
-        <li class="nav-item text-white">
-          Dimanche Fermé
-        </li>
-
+        {% endfor %}
     </ul>
   </div>
 </nav>

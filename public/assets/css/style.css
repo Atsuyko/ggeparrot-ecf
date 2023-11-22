@@ -18,3 +18,21 @@ h5,
 h6 {
   font-family: 'Montserrat', sans-serif;
 }
+
+#home {
+  width: 100%;
+  height: 50vh;
+  background: url("../img/accueil.jpg") bottom center;
+  background-size: cover;
+  position: relative;
+  padding: 0;
+}
+
+.img-txt,
+.shad:hover {
+  text-shadow: #d9230f 5px 0 10px;
+}
+
+#logo {
+  height: 80px;
+}
