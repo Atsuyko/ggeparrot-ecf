@@ -18,8 +18,8 @@
         <li class="nav-item text-white">
           {{ openingTime.day }}
           {% if openingTime.openAM is not null and openingTime.closeAM is not null %}
-          {{ openingTime.openAM|date("G:i") }} - {{ openingTime.closeAM|date("G:i") }}
-          {% else %} Fermé - {% endif %}
+          {{ openingTime.openAM|date("G:i") }} - {{ openingTime.closeAM|date("G:i") }} |
+          {% else %} Fermé | {% endif %}
           {% if openingTime.openPM is not null and openingTime.closePM is not null %}
           {{ openingTime.openPM|date("G:i") }} - {{ openingTime.closePM|date("G:i") }}
           {% else %} Fermé {% endif %}

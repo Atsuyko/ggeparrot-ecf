@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md bg-dark" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="{{ path('home') }}">
       <img src="{{ asset('assets/img/Logo.png') }}" alt="logo" id="logo">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
@@ -10,10 +10,10 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link shad" href="#">Accueil</a>
+          <a class="nav-link shad" href="{{ path('home') }}">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link shad" href="#">Espace entretien</a>
+          <a class="nav-link shad" href="{{ path('service') }}">Espace entretien</a>
         </li>
         <li class="nav-item">
           <a class="nav-link shad" href="#">Espace occasion</a>
