@@ -7,12 +7,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class EmployeeController extends AbstractController
+class NoticeController extends AbstractController
 {
-    #[Route('/employee', name: 'employee')]
+    #[Route('/mentions-légales', name: 'notice')]
     public function index(OpeningTimeRepository $openingTimeRepository): Response
     {
-        return $this->render('employee/index.html.twig', [
+        return $this->render('notice/index.html.twig', [
             'openingTimes' => $openingTimeRepository->findAll(),
         ]);
     }

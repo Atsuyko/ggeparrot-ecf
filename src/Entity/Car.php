@@ -47,35 +47,35 @@ class Car
     #[Assert\NotBlank()]
     private ?int $price = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank()]
     #[Assert\Length(
         min: 2,
-        max: 100,
+        max: 255,
     )]
     private ?string $teaserImg = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank()]
     #[Assert\Length(
         min: 2,
-        max: 100,
+        max: 255,
     )]
     private ?string $img1 = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank()]
     #[Assert\Length(
         min: 2,
-        max: 100,
+        max: 255,
     )]
     private ?string $img2 = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank()]
     #[Assert\Length(
         min: 2,
-        max: 100,
+        max: 255,
     )]
     private ?string $img3 = null;
 
