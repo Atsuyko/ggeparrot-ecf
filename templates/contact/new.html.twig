@@ -3,14 +3,57 @@
 {% block title %}Garage V.Parrot - Contact{% endblock %}
 
 {% block body %}
-<section id="contact">
-
+<section id="approach">
+    <div class="container text-white">
+        <h1 class="display-4 pt-3 img-txt">
+            Nous contacter
+        </h1>
+        <p class="img-txt">
+            Vous pouvez nous contacter via les informations présentent en bas cette page.
+        </p>
+        <p class="img-txt">
+            Pour tout renseignement ou prise de rendez-vous, un formulaire de contact disponible ci-dessous.
+        </p>
+    </div>
 </section>
-<section id="contact-form">
+<section id="form-contact">
+    <div class="d-flex justify-content-center align-item-center p-3">
+        <h2>Formulaire de contact</h2>
+    </div>
     <div class="container">
-        <h1 class="display-3 mt-3">Nous contacter</h1>
         {{ form_start(form) }}
         {{form(form)}}
+    </div>
+</section>
+<section id="info-contact">
+    <div class="conainer">
+        <div class="d-flex justify-content-center align-item-center pt-3">
+            <h2>Information de contact</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-center mt-2">
+                <h3>Localisation</h3>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d22208.763339795507!2d6.129705340062108!3d45.90940207949501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1701256085281!5m2!1sfr!2sfr"
+                    width="auto" height="auto" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="col-md-4 text-center mt-2">
+                <h3>Adresse postale</h3>
+                <p>
+                    Garage V.PARROT <br>
+                    1 rue du garage <br>
+                    74000, Annecy
+                </p>
+            </div>
+            <div class="col-md-4 text-center mt-2">
+                <h3>Contact</h3>
+                <p>
+                    Email : <a href="mailto:ggeparrot@example.com">ggeparrot@example.com</a> <br>
+                    Téléphone : <a href="tel:0412345678">0412345678</a>
+                </p>
+            </div>
+        </div>
     </div>
 </section>
 {% endblock body %}

@@ -17,6 +17,14 @@
         </p>
     </div>
 </section>
+{% for message in app.flashes('primary') %}
+<div class="container">
+    <div class="alert alert-dismissible alert-primary mt-3">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        {{ message }}
+    </div>
+</div>
+{% endfor %}
 <div class="d-flex justify-content-center align-item-center p-3">
     <h2>Les véhicules disponible à la vente</h2>
 </div>
@@ -28,7 +36,7 @@
         <div class="row">
             {% for car in cars %}
             <div class="col-lg-4 col-md-6">
-                <div class="card my-3">
+                <div class="card border-dark my-3">
                     <img src="{{ 'uploads/' ~ car.teaserImg }}" alt="Photo Vitrine" class="card-img-top">
                     <div class="card-body">
                         <h3 class="card-title">{{ car.brand }}</h3>
@@ -36,7 +44,7 @@
                         <p class="card-text">{{ car.km }} km</p>
                         <p class="card-text">{{ car.year|date("Y") }}</p>
                         <p class="card-text">{{ car.price }} €</p>
-                        <a href="#" class="btn btn-primary btn-hover">Consulter</a>
+                        <a href="{{ path('car.show', {id: car.id}) }}" class="btn btn-dark shad">Consulter</a>
                     </div>
                 </div>
             </div>
