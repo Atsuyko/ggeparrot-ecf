@@ -14,6 +14,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+    /**
+     * Display home / Display opinions 
+     * Create an opinion
+     *
+     * @param OpinionRepository $opinionRepository
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param OpeningTimeRepository $openingTimeRepository
+     * @return Response
+     */
     #[Route('/', name: 'home')]
     public function index(OpinionRepository $opinionRepository, Request $request, EntityManagerInterface $em, OpeningTimeRepository $openingTimeRepository): Response
     {

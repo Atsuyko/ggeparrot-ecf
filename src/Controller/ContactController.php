@@ -13,6 +13,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ContactController extends AbstractController
 {
+    /**
+     * Create a new contact
+     *
+     * @param OpeningTimeRepository $openingTimeRepository
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
     #[Route('/contact', name: 'contact')]
     public function new(OpeningTimeRepository $openingTimeRepository, Request $request, EntityManagerInterface $em): Response
     {

@@ -14,6 +14,16 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
+    /**
+     * Edit password
+     *
+     * @param OpeningTimeRepository $openingTimeRepository
+     * @param User $user
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param UserPasswordHasherInterface $userPasswordHasher
+     * @return Response
+     */
     #[Route('/user/password/{id}', name: 'user.password', methods: ['GET', 'POST'])]
     public function editPassword(OpeningTimeRepository $openingTimeRepository, User $user, Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
     {

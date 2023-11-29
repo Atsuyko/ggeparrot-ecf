@@ -19,6 +19,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class CarController extends AbstractController
 {
+    /**
+     * Display all cars announces and display opening time on footer
+     *
+     * @param OpeningTimeRepository $openingTimeRepository
+     * @param CarRepository $carRepository
+     * @return Response
+     */
     #[Route('/annonces', name: 'car')]
     public function index(OpeningTimeRepository $openingTimeRepository, CarRepository $carRepository): Response
     {
@@ -30,6 +37,15 @@ class CarController extends AbstractController
         ]);
     }
 
+    /**
+     * Display one car announce
+     *
+     * @param OpeningTimeRepository $openingTimeRepository
+     * @param Car $car
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
     #[Route('/annonces/show/{id}', name: 'car.show')]
     public function show(OpeningTimeRepository $openingTimeRepository, Car $car, Request $request, EntityManagerInterface $em): Response
     {
@@ -53,6 +69,15 @@ class CarController extends AbstractController
         ]);
     }
 
+    /**
+     * Create a new announce
+     *
+     * @param OpeningTimeRepository $openingTimeRepository
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param SluggerInterface $slugger
+     * @return void
+     */
     #[Route('/annonce/nouvelle', name: 'car.new')]
     #[IsGranted('ROLE_USER')]
     public function new(OpeningTimeRepository $openingTimeRepository, Request $request, EntityManagerInterface $em, SluggerInterface $slugger)
@@ -64,6 +89,7 @@ class CarController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $car = $form->getData();
 
+            // Take the upload file name, rename and safe it before save in DB
             $teaserImg = $form->get('teaserImg')->getData();
             $originalFilename = pathinfo($teaserImg->getClientOriginalName(), PATHINFO_FILENAME);
             $safeFilename = $slugger->slug($originalFilename);
@@ -137,6 +163,16 @@ class CarController extends AbstractController
         ]);
     }
 
+    /**
+     * Update an announce
+     *
+     * @param OpeningTimeRepository $openingTimeRepository
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param SluggerInterface $slugger
+     * @param Car $car
+     * @return void
+     */
     #[Route('/annonce/modifier/{id}', name: 'car.edit')]
     #[IsGranted('ROLE_USER')]
     public function edit(OpeningTimeRepository $openingTimeRepository, Request $request, EntityManagerInterface $em, SluggerInterface $slugger, Car $car)
@@ -221,6 +257,13 @@ class CarController extends AbstractController
         ]);
     }
 
+    /**
+     * Delete an announce
+     *
+     * @param Car $car
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
     #[Route('/car/delete/{id}', name: 'car.delete')]
     #[IsGranted('ROLE_USER')]
     public function delete(Car $car, EntityManagerInterface $em): Response
