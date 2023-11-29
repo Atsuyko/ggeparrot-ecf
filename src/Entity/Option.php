@@ -25,7 +25,7 @@ class Option
     )]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: Car::class, inversedBy: 'options')]
+    #[ORM\ManyToMany(targetEntity: Car::class, mappedBy: 'options')]
     private Collection $car;
 
     public function __construct()
@@ -62,6 +62,7 @@ class Option
     {
         if (!$this->car->contains($car)) {
             $this->car->add($car);
+            $car->addOption($this);
         }
 
         return $this;

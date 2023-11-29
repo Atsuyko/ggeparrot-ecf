@@ -49,8 +49,9 @@ class CarType extends AbstractType
                 ]
             ])
             ->add('year', DateType::class, [
+                'widget' => 'single_text',
                 'attr' => [
-                    'class' => ''
+                    'class' => 'form-control'
                 ],
                 'label' => 'Année',
                 'label_attr' => [

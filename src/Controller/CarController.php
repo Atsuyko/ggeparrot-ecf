@@ -26,6 +26,7 @@ class CarController extends AbstractController
 
         return $this->render('car/index.html.twig', [
             'openingTimes' => $openingTimeRepository->findAll(),
+            'cars' => $cars
         ]);
     }
 
@@ -68,7 +69,7 @@ class CarController extends AbstractController
             $newFilename = $safeFilename . '-' . uniqid() . '.' . $teaserImg->guessExtension();
             try {
                 $teaserImg->move(
-                    $this->getParameter('img_directory'),
+                    $this->getParameter('uploads_dir'),
                     $newFilename
                 );
             } catch (FileException $e) {
@@ -82,7 +83,7 @@ class CarController extends AbstractController
             $newFilename = $safeFilename . '-' . uniqid() . '.' . $img1->guessExtension();
             try {
                 $img1->move(
-                    $this->getParameter('img_directory'),
+                    $this->getParameter('uploads_dir'),
                     $newFilename
                 );
             } catch (FileException $e) {
@@ -96,7 +97,7 @@ class CarController extends AbstractController
             $newFilename = $safeFilename . '-' . uniqid() . '.' . $img2->guessExtension();
             try {
                 $img2->move(
-                    $this->getParameter('img_directory'),
+                    $this->getParameter('uploads_dir'),
                     $newFilename
                 );
             } catch (FileException $e) {
@@ -110,15 +111,13 @@ class CarController extends AbstractController
             $newFilename = $safeFilename . '-' . uniqid() . '.' . $img3->guessExtension();
             try {
                 $img3->move(
-                    $this->getParameter('img_directory'),
+                    $this->getParameter('uploads_dir'),
                     $newFilename
                 );
             } catch (FileException $e) {
             }
 
             $car->setImg3($newFilename);
-
-            dd($car);
 
             $em->persist($car);
             $em->flush();

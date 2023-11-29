@@ -48,7 +48,6 @@ class Car
     private ?int $price = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\NotBlank()]
     #[Assert\Length(
         min: 2,
         max: 255,
@@ -56,7 +55,6 @@ class Car
     private ?string $teaserImg = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\NotBlank()]
     #[Assert\Length(
         min: 2,
         max: 255,
@@ -64,7 +62,6 @@ class Car
     private ?string $img1 = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\NotBlank()]
     #[Assert\Length(
         min: 2,
         max: 255,
@@ -72,14 +69,13 @@ class Car
     private ?string $img2 = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\NotBlank()]
     #[Assert\Length(
         min: 2,
         max: 255,
     )]
     private ?string $img3 = null;
 
-    #[ORM\ManyToMany(targetEntity: Option::class, mappedBy: 'car')]
+    #[ORM\ManyToMany(targetEntity: Option::class, inversedBy: 'car')]
     private Collection $options;
 
     #[ORM\OneToMany(mappedBy: 'car', targetEntity: Contact::class)]
@@ -216,7 +212,6 @@ class Car
     {
         if (!$this->options->contains($option)) {
             $this->options->add($option);
-            $option->addCar($this);
         }
 
         return $this;
@@ -224,9 +219,7 @@ class Car
 
     public function removeOption(Option $option): static
     {
-        if ($this->options->removeElement($option)) {
-            $option->removeCar($this);
-        }
+        $this->options->removeElement($option);
 
         return $this;
     }
