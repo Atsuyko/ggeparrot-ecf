@@ -50,6 +50,9 @@ class ContactType extends AbstractType
                     'class' => 'form-control',
                 ],
                 'label' => 'Email',
+                'label_attr' => [
+                    'class' => 'form-label mt-3'
+                ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 180]),
                     new Assert\Email(),

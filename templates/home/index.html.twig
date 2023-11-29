@@ -34,7 +34,8 @@
             <div class="col-xl-3 col-lg-4 col-md-6">
                 <div class="card p-3 m-3 bg-dark text-white">
                     <h3 class="card-header">{{ opinion.firstname }}</h3>
-                    <p class="card-text mt-2">{{ opinion.opinion }}</p>
+                    <h5 class="card-subtitle mt-3 text-primary">{{ opinion.score }} / 5</h3>
+                        <p class="card-text mt-2">{{ opinion.opinion }}</p>
                 </div>
             </div>
             {% endif %}

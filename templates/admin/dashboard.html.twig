@@ -4,9 +4,15 @@
 
 {% block content %}
 <div class="container">
-  <h1 class="display-3 mt-3">Bienvenu sur le système d'administration du Garage V.PARROT !</h1>
+  <h1 class="display-4 mt-3">Bienvenu sur le système d'administration du Garage V.PARROT !</h1>
+  {% if 'ROLE_ADMIN' in app.user.roles %}
+  <p>Vous êtes administrateur du site. Vous pouvez accédez à toute les sections du système d'administration.</p>
+  {% endif %}
+  {% if 'ROLE_ADMIN' not in app.user.roles %}
+  <p>Vous êtes un employé. Vous pouvez accédez aux avis clients ainsi qu'aux demandes de contact.</p>
+  {% endif %}
   <div>
-    <a href="{{ path('home') }}" class="btn">Retour à l'accueil du site</a>
+    <a href="{{ path('home') }}" class="btn mt-3">Retour à l'accueil du site</a>
   </div>
 </div>
 {% endblock content %}

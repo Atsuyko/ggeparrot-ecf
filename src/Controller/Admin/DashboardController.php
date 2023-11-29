@@ -33,11 +33,13 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-house');
-        yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', User::class);
-        yield MenuItem::linkToCrud('Annonces', 'fa fa-car', Car::class);
-        yield MenuItem::linkToCrud('Options', 'fa fa-gear', Option::class);
-        yield MenuItem::linkToCrud('Services', 'fa fa-clipboard', Service::class);
-        yield MenuItem::linkToCrud('Horaires', 'fa fa-clock', OpeningTime::class);
+        if ($this->getUser() && in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
+            yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', User::class);
+            yield MenuItem::linkToCrud('Services', 'fa fa-clipboard', Service::class);
+            yield MenuItem::linkToCrud('Horaires', 'fa fa-clock', OpeningTime::class);
+            yield MenuItem::linkToCrud('Annonces', 'fa fa-car', Car::class);
+            yield MenuItem::linkToCrud('Options', 'fa fa-gear', Option::class);
+        }
         yield MenuItem::linkToCrud('Avis', 'fa fa-comment', Opinion::class);
         yield MenuItem::linkToCrud('Contacts', 'fa fa-envelope', Contact::class);
     }

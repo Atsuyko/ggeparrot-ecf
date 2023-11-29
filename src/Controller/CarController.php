@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class CarController extends AbstractController
 {
@@ -33,7 +34,7 @@ class CarController extends AbstractController
     public function show(OpeningTimeRepository $openingTimeRepository, Car $car, Request $request, EntityManagerInterface $em): Response
     {
         $contact = new Contact();
-        $contact->setCar($car);
+        $contact->setCar($car)->setSubject('Renseignement annonce N° ' . $car->getId() . ' ' . $car->getBrand() . ' ' . $car->getModel());
 
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
@@ -53,6 +54,7 @@ class CarController extends AbstractController
     }
 
     #[Route('/annonce/nouvelle', name: 'car.new')]
+    #[IsGranted('ROLE_USER')]
     public function new(OpeningTimeRepository $openingTimeRepository, Request $request, EntityManagerInterface $em, SluggerInterface $slugger)
     {
         $car = new Car();
@@ -136,6 +138,7 @@ class CarController extends AbstractController
     }
 
     #[Route('/annonce/modifier/{id}', name: 'car.edit')]
+    #[IsGranted('ROLE_USER')]
     public function edit(OpeningTimeRepository $openingTimeRepository, Request $request, EntityManagerInterface $em, SluggerInterface $slugger, Car $car)
     {
         $form = $this->createForm(CarType::class, $car);
@@ -219,6 +222,7 @@ class CarController extends AbstractController
     }
 
     #[Route('/car/delete/{id}', name: 'car.delete')]
+    #[IsGranted('ROLE_USER')]
     public function delete(Car $car, EntityManagerInterface $em): Response
     {
         $em->remove($car);

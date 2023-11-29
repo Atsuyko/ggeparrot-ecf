@@ -51,9 +51,14 @@
   </div>
 </section>
 <section id="car-contact">
-  <div class="container">
-
+  <div class="d-flex justify-content-center align-item-center p-3">
+    <h2>Formulaire de contact</h2>
   </div>
+  <div class="container">
+    {{ form_start(form) }}
+    {{form(form)}}
+  </div>
+
 </section>
 
 {% endblock %}

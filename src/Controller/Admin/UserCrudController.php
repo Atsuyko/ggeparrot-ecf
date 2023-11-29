@@ -20,6 +20,7 @@ class UserCrudController extends AbstractCrudController
     {
     }
 
+
     public static function getEntityFqcn(): string
     {
         return User::class;
@@ -50,7 +51,6 @@ class UserCrudController extends AbstractCrudController
                 return $action->setIcon('fa fa-trash')->setLabel('Supprimer');
             });
     }
-
 
     public function configureFields(string $pageName): iterable
     {
