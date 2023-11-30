@@ -6,6 +6,8 @@ use App\Entity\Car;
 use App\Form\CarType;
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Form\SearchType;
+use App\Model\SearchData;
 use App\Repository\CarRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\OpeningTimeRepository;
@@ -27,13 +29,26 @@ class CarController extends AbstractController
      * @return Response
      */
     #[Route('/annonces', name: 'car')]
-    public function index(OpeningTimeRepository $openingTimeRepository, CarRepository $carRepository): Response
+    public function index(OpeningTimeRepository $openingTimeRepository, CarRepository $carRepository, Request $request): Response
     {
-        $cars = $carRepository->findAll();
+        $searchData = new SearchData();
+        $form = $this->createForm(SearchType::class, $searchData);
+        $form->handleRequest($request);
+
+        [$minPrice, $maxPrice, $minKm, $maxKm, $minYear, $maxYear] = $carRepository->findMinMax($searchData);
+
+        $cars = $carRepository->findBySearch($searchData);
 
         return $this->render('car/index.html.twig', [
             'openingTimes' => $openingTimeRepository->findAll(),
-            'cars' => $cars
+            'cars' => $cars,
+            'form' => $form->createView(),
+            'minPrice' => $minPrice,
+            'maxPrice' => $maxPrice,
+            'minKm' => $minKm,
+            'maxKm' => $maxKm,
+            'minYear' => $minYear,
+            'maxYear' => $maxYear,
         ]);
     }
 
@@ -60,6 +75,8 @@ class CarController extends AbstractController
 
             $em->persist($contact);
             $em->flush();
+
+            return $this->redirectToRoute('car');
         }
 
         return $this->render('car/show.html.twig', [
