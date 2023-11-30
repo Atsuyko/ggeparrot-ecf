@@ -21,14 +21,16 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class CarController extends AbstractController
 {
+
+    #[Route('/annonces', name: 'car')]
     /**
-     * Display all cars announces and display opening time on footer
+     * Display all cars announces and filter
      *
      * @param OpeningTimeRepository $openingTimeRepository
      * @param CarRepository $carRepository
+     * @param Request $request
      * @return Response
      */
-    #[Route('/annonces', name: 'car')]
     public function index(OpeningTimeRepository $openingTimeRepository, CarRepository $carRepository, Request $request): Response
     {
         $searchData = new SearchData();

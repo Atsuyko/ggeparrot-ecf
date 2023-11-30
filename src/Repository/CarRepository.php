@@ -23,6 +23,12 @@ class CarRepository extends ServiceEntityRepository
         parent::__construct($registry, Car::class);
     }
 
+    /**
+     * Get min and max value for filter
+     *
+     * @param SearchData $searchData
+     * @return array
+     */
     public function findMinMax(SearchData $searchData): array
     {
         $result = $this->getSearchQuery($searchData, true, true, true)
@@ -47,12 +53,27 @@ class CarRepository extends ServiceEntityRepository
         ];
     }
 
+    /**
+     * Search by filter
+     *
+     * @param SearchData $searchData
+     * @return array
+     */
     public function findBySearch(SearchData $searchData): array
     {
         $query = $this->getSearchQuery($searchData);
         return $query->getQuery()->getResult();
     }
 
+    /**
+     * Filter query
+     *
+     * @param SearchData $searchData
+     * @param boolean $ignorePrice
+     * @param boolean $ignoreKm
+     * @param boolean $ignoreYear
+     * @return QueryBuilder
+     */
     private function getSearchQuery(SearchData $searchData, $ignorePrice = false, $ignoreKm = false, $ignoreYear = false): QueryBuilder
     {
         $query = $this->createQueryBuilder('cars');
@@ -83,13 +104,13 @@ class CarRepository extends ServiceEntityRepository
 
         if (!empty($searchData->minYear) && $ignoreYear === false) {
             $query = $query
-                ->andWhere('SUBSTRING(cars.year, 1, 4) >= :minYear')
+                ->andWhere('SUBSTRING(cars.year, 1, 4) >= :minYear') // Get only the year of the date
                 ->setParameter('minYear', $searchData->minYear);
         }
 
         if (!empty($searchData->maxYear) && $ignoreYear === false) {
             $query = $query
-                ->andWhere('SUBSTRING(cars.year, 1, 4) <= :maxYear')
+                ->andWhere('SUBSTRING(cars.year, 1, 4) <= :maxYear') // Get only the year of the date
                 ->setParameter('maxYear', $searchData->maxYear);
         }
 
