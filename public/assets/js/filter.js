@@ -1,11 +1,86 @@
-const priceSlider = document.getElementById('price-slider');
-const kmSlider = document.getElementById('km-slider');
-const yearSlider = document.getElementById('year-slider');
+const priceSlider = document.getElementById('price-slider')
+const kmSlider = document.getElementById('km-slider')
+const yearSlider = document.getElementById('year-slider')
+
+const submitBtn = document.getElementById('submit-filter')
+const resetBtn = document.getElementById('reset-filter')
+
+const filtersForm = document.getElementById('filters')
+
+const content = document.querySelector('#car-content')
+
+// Dynamic search on submit
+filtersForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+
+  // Get the form data
+  const form = new FormData(filtersForm)
+
+  // Create a query string
+  const params = new URLSearchParams()
+
+  form.forEach((value, key) => {
+    params.append(key, value)
+  })
+
+  // Get the current url
+  const url = new URL(window.location.href)
+
+  fetch(url.pathname + '?' + params.toString() + '&ajax=1', {
+    headers: {
+      'X-Requested-with': 'XMLHttpRequest'
+    }
+  }).then(response =>
+    response.json()
+  ).then(data => {
+    // Switch the content with active filters
+    content.innerHTML = data.content
+  }).catch(e => alert(e))
+
+})
+
+function resetFilters() {
+  filtersForm.addEventListener('reset', (e) => {
+    e.preventDefault()
+
+    priceSlider.noUiSlider.reset()
+    kmSlider.noUiSlider.reset()
+    yearSlider.noUiSlider.reset()
+
+    // Reset input values on filters
+    document.querySelectorAll('#filters input').forEach(input => {
+      input.value = ''
+    })
+
+    const form = new FormData(filtersForm)
+
+    const params = new URLSearchParams()
+
+    form.forEach((value, key) => {
+      params.append(key, value = '')
+    })
+
+    const url = new URL(window.location.href)
+
+    fetch(url.pathname + '?' + params.toString() + '&ajax=1', {
+      headers: {
+        'X-Requested-with': 'XMLHttpRequest'
+      }
+    }).then(response =>
+      response.json()
+    ).then(data => {
+      content.innerHTML = data.content
+    }).catch(e => alert(e))
+
+  })
+}
+
 
 if (priceSlider) {
   const minPrice = document.querySelector('#minPrice')
   const maxPrice = document.querySelector('#maxPrice')
 
+  // Create the slider
   const priceRange = noUiSlider.create(priceSlider, {
     start: [minPrice.value || parseInt(priceSlider.dataset.minprice, 10), maxPrice.value || parseInt(priceSlider.dataset.maxprice, 10)],
     connect: true,
@@ -26,6 +101,8 @@ if (priceSlider) {
     }
 
   })
+
+  resetFilters()
 }
 
 if (kmSlider) {

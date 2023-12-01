@@ -17,6 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class CarController extends AbstractController
@@ -24,7 +25,8 @@ class CarController extends AbstractController
 
     #[Route('/annonces', name: 'car')]
     /**
-     * Display all cars announces and filter
+     * Display all cars announces and filters
+     * If filters are used, adjust content with ajax
      *
      * @param OpeningTimeRepository $openingTimeRepository
      * @param CarRepository $carRepository
@@ -40,6 +42,23 @@ class CarController extends AbstractController
         [$minPrice, $maxPrice, $minKm, $maxKm, $minYear, $maxYear] = $carRepository->findMinMax($searchData);
 
         $cars = $carRepository->findBySearch($searchData);
+
+        // Check if ajax request exist
+        if ($request->get('ajax')) {
+            return new JsonResponse([
+                'content' => $this->renderView('car/_content.html.twig', [
+                    'openingTimes' => $openingTimeRepository->findAll(),
+                    'cars' => $cars,
+                    'form' => $form->createView(),
+                    'minPrice' => $minPrice,
+                    'maxPrice' => $maxPrice,
+                    'minKm' => $minKm,
+                    'maxKm' => $maxKm,
+                    'minYear' => $minYear,
+                    'maxYear' => $maxYear,
+                ])
+            ]);
+        }
 
         return $this->render('car/index.html.twig', [
             'openingTimes' => $openingTimeRepository->findAll(),

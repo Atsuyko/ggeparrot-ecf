@@ -31,25 +31,7 @@
 <section id="filter">
     {% include "car/_filter.html.twig" %}
 </section>
-<section id="car">
-    <div class="container">
-        <div class="row">
-            {% for car in cars %}
-            <div class="col-lg-4 col-md-6">
-                <div class="card border-dark my-3">
-                    <img src="{{ 'uploads/' ~ car.teaserImg }}" alt="Photo Vitrine" class="card-img-top">
-                    <div class="card-body">
-                        <h3 class="card-title">{{ car.brand }}</h3>
-                        <h5 class="card-subtitle my-3">{{ car.model }}</h5>
-                        <p class="card-text">{{ car.km }} km</p>
-                        <p class="card-text">{{ car.year|date("Y") }}</p>
-                        <p class="card-text">{{ car.price }} €</p>
-                        <a href="{{ path('car.show', {id: car.id}) }}" class="btn btn-dark shad">Consulter</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
+<section id="car-content">
+    {% include "car/_content.html.twig" %}
 </section>
 {% endblock %}
