@@ -3,8 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Car;
-use App\Entity\Option;
-use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;

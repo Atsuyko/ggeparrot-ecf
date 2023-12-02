@@ -29,12 +29,10 @@ class OpeningTimeCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         return $actions
-            ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->disable(Action::NEW)
             ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action) {
                 return $action->setIcon('fa fa-edit')->setLabel('Modifier');
             })
-            ->disable(Action::DETAIL)
             ->disable(Action::DELETE);
     }
 
