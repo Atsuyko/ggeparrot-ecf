@@ -62,7 +62,8 @@ class UserCrudController extends AbstractCrudController
             TextField::new('lastname', 'Nom'),
             TextField::new('password', 'Mot de passe')
                 ->setFormType(PasswordType::class)
-                ->onlyOnForms(),
+                ->onlyOnForms()
+                ->hideWhenUpdating(),
             ArrayField::new('roles', 'Role')
                 ->hideOnForm(),
         ];
