@@ -37,7 +37,7 @@ class UserPasswordType extends AbstractType
                     'attr' => [
                         'class' => 'form-control',
                     ],
-                    'label' => 'Confirmé le mot de passe',
+                    'label' => 'Confirmer le mot de passe',
                     'label_attr' => [
                         'class' => 'form-label',
                     ],
