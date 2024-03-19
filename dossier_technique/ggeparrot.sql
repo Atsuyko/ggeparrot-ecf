@@ -1,8 +1,8 @@
 -- Création de la BDD --
-CREATE DATABASE IF NOT EXISTS ggeparrot_ecf DEFAULT CHARACTER SET utf8;
+CREATE DATABASE IF NOT EXISTS ggeparrot DEFAULT CHARACTER SET utf8;
 
 -- Utilisation de la BDD
-USE ggeparrot_ecf;
+USE ggeparrot;
 
 -- CREATION DES TABLES --
 

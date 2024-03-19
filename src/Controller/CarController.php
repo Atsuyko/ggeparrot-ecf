@@ -189,7 +189,7 @@ class CarController extends AbstractController
 
             $this->addFlash(
                 'primary',
-                'La nouvelle annonce à bien été enregistrer.'
+                'La nouvelle annonce à bien été enregistrée.'
             );
 
             return $this->redirectToRoute('car');
